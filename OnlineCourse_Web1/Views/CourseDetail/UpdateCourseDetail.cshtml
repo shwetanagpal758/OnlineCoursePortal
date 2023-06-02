@@ -1,0 +1,66 @@
+﻿@model DataAccess.Models.Dto.CourseDetailDTO
+
+
+<form asp-action="UpdateCourseDetail">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Update CourseDetail</h1>
+        <hr />
+        <input hidden asp-for="Id" />
+        </div class="row">
+              <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+              <div class="col-2">
+                  <label asp-for="CourseName" class="control-label pt-2" style="font-size:20px;"></label>
+              </div>
+              <div class="col-10 pb-3 ">
+                  <input asp-for="CourseName" class="form-control" />
+                  <span asp-validation-for="CourseName" class="text-danger"></span>
+              </div>
+              <div class="col-2">
+                  <label asp-for="CourseDescription" class="control-label pt-2" style="font-size:20px;"></label>
+              </div>
+              <div class="col-10 pb-3">
+                  <input asp-for="CourseDescription" class="form-control" />
+                  <span asp-validation-for="CourseDescription" class="text-danger"></span>
+              </div>
+              <div class="col-2">
+                  <label asp-for="StartDate" class="control-label pt-2" style="font-size:20px;"></label>
+              </div>
+              <div class="col-10 pb-3">
+                  <input asp-for="StartDate" class="form-control" />
+                  <span asp-validation-for="StartDate" class="text-danger"></span>
+              </div>
+              <div class="col-2">
+                  <label asp-for="EndDate" class="control-label pt-2" style="font-size:20px;"></label>
+              </div>
+              <div class="col-10 pb-3">
+                  <input asp-for="EndDate" class="form-control" />
+                  <span asp-validation-for="EndDate" class="text-danger"></span>
+              </div>
+              <div class="col-2">
+                  <label asp-for="AvailableSeats" class="control-label pt-2" style="font-size:20px;"></label>
+              </div>
+              <div class="col-10 pb-3">
+                  <input asp-for="AvailableSeats" class="form-control" />
+                  <span asp-validation-for="AvailableSeats" class="text-danger"></span>
+              </div>
+
+             
+              <div class="col-5 offset-5">
+                 <a asp-action="IndexCourseDetail" asp-controller="CourseDetail" class="btn-primary btn form-control">Back to List</a>
+              </div>
+              <div class="col-5 ">
+                 <input type="submit" value="Update" class="btn btn-success form-control" />
+                 </div>
+
+         </div>
+     </div>
+
+</form>
+
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}
