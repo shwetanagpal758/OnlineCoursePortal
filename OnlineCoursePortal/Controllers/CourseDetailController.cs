@@ -226,7 +226,7 @@ namespace OnlineCoursePortal.Controllers
             return _response;
 
         }
-        [HttpGet("GetStatusTrue/status=true")]
+       [HttpGet("GetStatusTrue/status=true")]
         public async Task<ActionResult<APIResponse>> GetAll()
         {
             try
