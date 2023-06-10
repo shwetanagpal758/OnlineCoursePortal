@@ -5,7 +5,9 @@
         <div class="col">
             <h1 class="text-primary">CourseDetail List</h1>
         </div>
-       
+        <div class="col text-end pt-1">
+            <a asp-controller="CourseDetail" asp-action="CreateCourseDetail" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i>Create New Course</a>
+        </div>
     </div>
 
     <table class="table">
@@ -40,8 +42,9 @@
                     <td>@item.AvailableSeats</td>
 
                     <td>
-                       
-                        <a asp-controller="CourseBookingWeb" asp-action="CreateBooking" asp-route-CourseId="@item.Id" class="btn btn-outline-primary"> Book</a>
+                        <a asp-controller="CourseDetail" asp-action="UpdateCourseDetail" asp-route-coursedetailId="@item.Id" class="btn btn-outline-success"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-controller="CourseDetail" asp-action="DeleteCourseDetail" asp-route-coursedetailId="@item.Id" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a>
+                      
 
                     </td>
 

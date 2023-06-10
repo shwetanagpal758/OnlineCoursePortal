@@ -4,8 +4,8 @@ namespace DataAccess.Models.Dto
 {
     public class CourseDetailDTO
     {
-        [Required]
-        public int Id { get; set; }
+       
+       // public int Id { get; set; }
         //public int CourseId { get; set; }
         public string CourseName { get; set; }
         public string CourseDescription { get; set; }

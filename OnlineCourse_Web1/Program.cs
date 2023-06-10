@@ -23,6 +23,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<ICourseDetailService, CourseDetailService>();
 builder.Services.AddScoped<ICourseDetailService, CourseDetailService>();
+builder.Services.AddHttpClient<IBookingService, BookingService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();

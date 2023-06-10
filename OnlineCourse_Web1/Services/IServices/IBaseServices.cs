@@ -1,4 +1,5 @@
-﻿using OnlineCourse_Web1.Models;
+﻿using DataAccess.Models;
+using OnlineCourse_Web1.Models;
 
 namespace OnlineCourse_Web1.Services.IServices
 {

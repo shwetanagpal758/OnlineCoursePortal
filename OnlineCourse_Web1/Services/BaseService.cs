@@ -1,5 +1,6 @@
 ﻿
 using DataAccess;
+using DataAccess.Models;
 using Newtonsoft.Json;
 using OnlineCourse_Web1.Models;
 using OnlineCourse_Web1.Services.IServices;
@@ -80,7 +81,7 @@ public class BaseService : IBaseServices
         {
             var dto = new APIResponse
             {
-                ErrorMessage = new List<string> { Convert.ToString(e.Message) },
+                ErrorMessages = new List<string> { Convert.ToString(e.Message) },
                 IsSuccess = false
             };
             var res = JsonConvert.SerializeObject(dto);

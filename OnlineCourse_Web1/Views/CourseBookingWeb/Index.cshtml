@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DataAccess.Models.CourseBooking>
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Courses List</h1>
+        </div>
+
+    </div>
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    CourseBooking_Id
+                </th>
+
+                <th>
+                    CourseBooking_Name
+                </th>
+
+                <th>
+                    BookingDate
+                </th>
+                <th>
+                    NumberOfUsers
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.CourseBooking_Name</td>
+                    <td>@item.BookingDate</td>
+                   
+                    
+                    <td>@((item.NumberOfUsers).ToString())</td>
+                    <td>
+                        <div class="col text-end pt-1">
+                            <a  asp-controller="CourseBookingWeb" asp-action="DeleteBooking" asp-route-Id="@item.Id" class="btn btn-outline-primary"> Cancel</a>
+                        </div>
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>

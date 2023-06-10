@@ -9,8 +9,9 @@ namespace DataAccess.Models
     {
 
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
                public int Id { get; set; }
 
              // public int CourseId {get; set;}  
@@ -18,7 +19,7 @@ namespace DataAccess.Models
             public string CourseName { get; set; }
             public string CourseDescription { get; set; }
             public DateTime? StartDate { get; set; }
-            public DateTime EndDate { get; set; }
+            public DateTime? EndDate { get; set; }
             public int AvailableSeats { get; set; }
             public bool status { get; set; }
 

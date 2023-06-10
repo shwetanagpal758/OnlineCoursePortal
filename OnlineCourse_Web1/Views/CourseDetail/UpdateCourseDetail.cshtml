@@ -1,4 +1,4 @@
-﻿@model DataAccess.Models.Dto.CourseDetailDTO
+﻿@model DataAccess.Models.CourseDetail
 
 
 <form asp-action="UpdateCourseDetail">
@@ -7,7 +7,7 @@
         <h1 class="text-primary">Update CourseDetail</h1>
         <hr />
         <input hidden asp-for="Id" />
-        </div class="row">
+        <div class="row">
               <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
               <div class="col-2">
@@ -55,12 +55,10 @@
                  </div>
 
          </div>
-     </div>
+    </div>
+     
 
 </form>
 
 
 
-@section Scripts{
-    <partial name="_ValidationScriptsPartial"/>
-}

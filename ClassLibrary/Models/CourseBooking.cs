@@ -11,13 +11,18 @@ namespace DataAccess.Models
     public class CourseBooking
     {
         
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       
         public int Id { get; set; }
-/*
-        [ForeignKey("CourseDetail")]
+        /*
+                [ForeignKey("CourseDetail")]
+                public int CourseId { get; set; }
+                public CourseDetail CourseDetail { get; set; }*/
+
+        [ForeignKey("courseDetail")]
         public int CourseId { get; set; }
-        public CourseDetail CourseDetail { get; set; }*/
+        public CourseDetail courseDetail { get; set; }
         public string CourseBooking_Name { get; set; }
         
         public DateTime BookingDate { get; set; }

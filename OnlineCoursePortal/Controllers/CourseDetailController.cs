@@ -43,7 +43,7 @@ namespace OnlineCoursePortal.Controllers
 
                 IEnumerable<CourseDetail> coursedetailList = await _CourseDetailRepo.GetAllAsync();
 
-                _response.Result = _mapper.Map<List<CourseDetailDTO>>(coursedetailList);
+                _response.Result = _mapper.Map<List<CourseDetail>>(coursedetailList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
                 
@@ -79,13 +79,13 @@ namespace OnlineCoursePortal.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                var coursedetail = await _CourseDetailRepo.GetAsync(u => u.Id == id);
+                CourseDetail coursedetail = await _CourseDetailRepo.GetAsync(u => u.Id == id);
                 if (coursedetail == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     return NotFound(_response);
                 }
-                _response.Result = _mapper.Map<CourseDetailDTO>(coursedetail);
+                _response.Result = coursedetail;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
@@ -137,7 +137,7 @@ namespace OnlineCoursePortal.Controllers
         return Ok(model);*/
 
 
-        [Authorize(Roles = "admin")]
+     //   [Authorize(Roles = "admin")]
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -175,15 +175,15 @@ namespace OnlineCoursePortal.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<APIResponse>> UpdateCourseDetail(int id, [FromBody] CourseDetailDTO coursedetailDTO)
+        public async Task<ActionResult<APIResponse>> UpdateCourseDetail(int id, [FromBody] CourseDetail coursedetail)
         {
             try
             {
-                if (coursedetailDTO == null || id != coursedetailDTO.Id)
+                if (coursedetail == null )
                 {
                     return BadRequest();
                 }
-                CourseDetail model = _mapper.Map<CourseDetail>(coursedetailDTO);
+                CourseDetail model = _mapper.Map<CourseDetail>(coursedetail);
 
                 await _CourseDetailRepo.UpdateAsync(model);
                 _response.StatusCode = HttpStatusCode.NoContent;

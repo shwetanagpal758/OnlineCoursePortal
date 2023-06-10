@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addApplicationUserToDb : Migration
+    public partial class All : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,20 +54,6 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CourseBookings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    CourseBooking_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NumberOfUsers = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CourseBookings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,6 +196,28 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CourseBookings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    CourseBooking_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NumberOfUsers = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseBookings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CourseBookings_CourseDetails_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "CourseDetails",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -248,6 +256,11 @@ namespace DataAccess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseBookings_CourseId",
+                table: "CourseBookings",
+                column: "CourseId");
         }
 
         /// <inheritdoc />
@@ -272,9 +285,6 @@ namespace DataAccess.Migrations
                 name: "CourseBookings");
 
             migrationBuilder.DropTable(
-                name: "CourseDetails");
-
-            migrationBuilder.DropTable(
                 name: "LocalUsers");
 
             migrationBuilder.DropTable(
@@ -282,6 +292,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "CourseDetails");
         }
     }
 }

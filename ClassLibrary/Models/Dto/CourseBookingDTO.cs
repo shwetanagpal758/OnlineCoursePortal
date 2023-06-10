@@ -10,13 +10,14 @@ namespace DataAccess.Models.Dto
 {
     public class CourseBookingDTO
     {
-        [Required]
-        public int Id { get; set; }
+        
+      //  public int Id { get; set; }
         /* [Required]
          public string CourseName { get; set; }*/
        /* [Required]
         public int CourseDetailId { get; set; }*/
-        [Required]
+       
+        public int CourseId { get; set; }
         public string CourseBooking_Name { get; set; }
 
         public DateTime BookingDate { get; set; }

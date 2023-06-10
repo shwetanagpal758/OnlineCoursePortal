@@ -44,7 +44,7 @@ namespace OnlineCoursePortal.Controllers
 
                 IEnumerable<CourseBooking> coursebookingList = await _CourseBookingRepo.GetAllAsync();
 
-                _response.Result = _mapper.Map<List<CourseBookingDTO>>(coursebookingList);
+                _response.Result = coursebookingList;
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
 
@@ -97,24 +97,24 @@ namespace OnlineCoursePortal.Controllers
             }
             return _response;
         }
-        [HttpPost]
+       /* [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-        public async Task<ActionResult<APIResponse>> CreateCourseBooking([FromBody] CourseBookingDTO CoursebookingDTO)
+        public async Task<ActionResult<APIResponse>> CreateCourseBooking([FromBody] CourseBooking Coursebooking)
 
         {
             try
             {
 
-                if (CoursebookingDTO == null)
+                if (Coursebooking == null)
                 {
-                    return BadRequest(CoursebookingDTO);
+                    return BadRequest(Coursebooking);
                 }
 
 
-                CourseBooking coursebooking = _mapper.Map<CourseBooking>(CoursebookingDTO);
+                CourseBooking coursebooking = _mapper.Map<CourseBooking>(Coursebooking);
 
 
 
@@ -130,7 +130,7 @@ namespace OnlineCoursePortal.Controllers
                 _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
             return _response;
-        }
+        }*/
         /*CourseDetail model = _mapper.Map<CourseDetail>(CourseDetailDTO);
 
         _CourseDetailRepo.Add(model);
@@ -176,11 +176,11 @@ namespace OnlineCoursePortal.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<APIResponse>> UpdateCourseBooking(int id, [FromBody] CourseBookingDTO coursebookingDTO)
+        public async Task<ActionResult<APIResponse>> UpdateCourseBooking(int id, [FromBody] CourseBooking coursebookingDTO)
         {
             try
             {
-                if (coursebookingDTO == null || id != coursebookingDTO.Id)
+                if (coursebookingDTO == null )
                 {
                     return BadRequest();
                 }
@@ -198,29 +198,29 @@ namespace OnlineCoursePortal.Controllers
             }
             return _response;
         }
-        [HttpPost("newcreate")]
+        [HttpPost]
         public async Task<ActionResult<APIResponse>> Createnew([FromBody] CourseBookingDTO createDTO)
         {
             try
             {
 
-                if (await _CourseBookingRepo.GetAsync(u => u.CourseBooking_Name == createDTO.CourseBooking_Name) != null)
+                /*if (await _CourseBookingRepo.GetAsync(u => u.CourseBooking_Name == createDTO.CourseBooking_Name) != null)
                 {
                     ModelState.AddModelError("ErrorMessages", "Customername already taken");
                     return BadRequest(ModelState);
-                }
+                }*/
 
                 if (createDTO == null)
                 {
                     return BadRequest();
                 }
 
-                if (await _CourseBookingRepo.GetAsync(u => u.Id == createDTO.Id) == null)
+                if (await _CourseDetailRepo.GetAsync(u => u.Id == createDTO.CourseId) == null)
                 {
                     ModelState.AddModelError("ErrorMessages", "Id is invalid");
                     return BadRequest(ModelState);
                 }
-                var Courseupdate = await _CourseDetailRepo.GetAsync(u => u.Id == createDTO.Id);
+                var Courseupdate = await _CourseDetailRepo.GetAsync(u => u.Id == createDTO.CourseId);
                 int available = Courseupdate.AvailableSeats;
                 int Coursedone = available - createDTO.NumberOfUsers;
                 if (Coursedone < 0)
@@ -239,7 +239,7 @@ namespace OnlineCoursePortal.Controllers
 
                 _response.Result = _mapper.Map<CourseBooking>(booking);
                 _response.StatusCode = HttpStatusCode.OK;
-                return CreatedAtRoute("GetBooking", new { id = booking.Id }, _response);
+             //   return CreatedAtRoute("GetBooking", new { id = booking.Id }, _response);
             }
             catch (Exception ex)
             {
@@ -262,8 +262,8 @@ namespace OnlineCoursePortal.Controllers
 
                 var booking = await _CourseBookingRepo.GetAsync(u => u.Id == id);
                 int bookedusers = booking.NumberOfUsers;
-                int courseid = booking.Id;
-                var course = await _CourseDetailRepo.GetAsync(u => u.Id == id);
+                int courseid = booking.CourseId;
+                var course = await _CourseDetailRepo.GetAsync(u => u.Id == courseid);
                 int available = course.AvailableSeats;
                 int updatedseats = available + bookedusers;
                 course.AvailableSeats = updatedseats;

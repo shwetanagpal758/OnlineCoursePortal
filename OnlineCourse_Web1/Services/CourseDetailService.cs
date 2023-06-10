@@ -1,7 +1,7 @@
 ﻿
 
 using DataAccess;
-using DataAccess.Models.Dto;
+using DataAccess.Models;
 using Newtonsoft.Json.Linq;
 using OnlineCourse_Web1.Models;
 
@@ -23,7 +23,7 @@ namespace OnlineCourse_Web1.Services
 
 
 
-        public Task<T> CreateAsync<T>(CourseDetailDTO dto)
+        public Task<T> CreateAsync<T>(CourseDetail dto)
         {
             return SendAsync<T>(new APIRequest()
             {
@@ -79,7 +79,7 @@ namespace OnlineCourse_Web1.Services
             });
         }
 
-        public Task<T> UpdateAsync<T>(CourseDetailDTO dto)
+        public Task<T> UpdateAsync<T>(CourseDetail dto)
         {
             return SendAsync<T>(new APIRequest()
             {
@@ -90,7 +90,34 @@ namespace OnlineCourse_Web1.Services
 
             });
         }
+        public Task<T> UpdateStatusAsync<T>(int id)
+        {
+            return SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.ApiType.POST,
+                Url = coursedetailUrl + "/api/CourseDetail/" + id
 
-       
+            });
+        }
+        public Task<T> GetAllTrueAsync<T>()
+        {
+            return SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = coursedetailUrl + "/api/CourseDetail/GetStatusTrue/status=true"
+
+            });
+        }
+        public Task<T> GetAllFalseAsync<T>()
+        {
+            return SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.ApiType.GET,
+                Url = coursedetailUrl + "/api/CourseDetail/GetStatusFalse/status=false"
+
+            });
+        }
+
+
     }
 }

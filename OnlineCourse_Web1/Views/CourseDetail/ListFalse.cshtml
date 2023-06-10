@@ -41,8 +41,8 @@
 
                     <td>
                        
-                        <a asp-controller="CourseBookingWeb" asp-action="CreateBooking" asp-route-CourseId="@item.Id" class="btn btn-outline-primary"> Book</a>
-
+                        <a asp-controller="CourseDetail" asp-action="Reject" asp-route-Id="@item.Id" class="btn btn-outline-primary"> Reject</a>
+                        <a asp-controller="CourseDetail" asp-action="Approve" asp-route-Id="@item.Id" class="btn btn-outline-primary"> Approve</a>
                     </td>
 
                 </tr>
